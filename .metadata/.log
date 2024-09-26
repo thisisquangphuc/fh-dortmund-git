@@ -1,0 +1,13 @@
+!SESSION 2024-09-26 10:23:29.785 -----------------------------------------------
+eclipse.buildId=4.33.0.20240905-0613
+java.version=23
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=aarch64, WS=cocoa, NL=en_VN
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os macosx -ws cocoa -arch aarch64 -product org.eclipse.epp.package.java.product
+
+!ENTRY ch.qos.logback.classic 1 0 2024-09-26 10:23:31.724
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2024-09-26 10:28:31.614
+!MESSAGE Logback config file: /Users/phuc/eclipse-workspace/.metadata/.plugins/org.eclipse.m2e.logback/logback.2.6.1.20240411-1122.xml
