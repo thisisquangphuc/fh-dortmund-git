@@ -1,0 +1,96 @@
+import java.util.ArrayList;
+import java.util.List;
+
+class CarBrand {
+    private int id;
+    private String make;
+    private String model;
+    private int yearOfManufacture;
+    private String color;
+    private double price;
+    private String registrationNumber;
+
+    // Constructor
+    public CarBrand(int id, String make, String model, int yearOfManufacture, String color, double price, String registrationNumber) {
+        this.id = id;
+        this.make = make;
+        this.model = model;
+        this.yearOfManufacture = yearOfManufacture;
+        this.color = color;
+        this.price = price;
+        this.registrationNumber = registrationNumber;
+    }
+
+    // Getters
+    public int getId() {
+        return id;
+    }
+
+    public String getMake() {
+        return make;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public int getYearOfManufacture() {
+        return yearOfManufacture;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public String getRegistrationNumber() {
+        return registrationNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "id=" + id +
+                ", make='" + make + '\'' +
+                ", model='" + model + '\'' +
+                ", yearOfManufacture=" + yearOfManufacture +
+                ", color='" + color + '\'' +
+                ", price=" + price +
+                ", registrationNumber='" + registrationNumber + '\'' +
+                '}';
+    }
+
+ // Method to filter cars by brand
+    public static List<Car> getCarsByBrand(Car[] cars, String brand) {
+        List<Car> result = new ArrayList<>();
+        for (Car car : cars) {
+            if (car.getMake().equalsIgnoreCase(brand)) {
+                result.add(car);
+            }
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+
+        Car[] carArray = new Car[]{
+                new Car(1, "Toyota", "Camry", 2020, "Blue", 24000, "ABC123"),
+                new Car(2, "Honda", "Civic", 2019, "Red", 22000, "DEF456"),
+                new Car(3, "Ford", "Mustang", 2021, "Black", 35000, "GHI789"),
+                new Car(4, "Chevrolet", "Malibu", 2018, "White", 20000, "JKL012"),
+                new Car(5, "Tesla", "Model 3", 2022, "Silver", 40000, "MNO345")
+        };
+        
+        String brandToFilter = "Toyota";
+        List<Car> filteredCars = getCarsByBrand(carArray, brandToFilter);
+
+        System.out.println("Cars of brand " + brandToFilter + ":");
+        for (Car car : filteredCars) {
+            System.out.println(car);
+        }
+        
+    }
+}
