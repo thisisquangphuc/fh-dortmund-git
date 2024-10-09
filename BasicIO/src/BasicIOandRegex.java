@@ -47,7 +47,7 @@ public class BasicIOandRegex {
 				new ChargingStation(1, "Dortmund", new EnergySource[]{energySource[1]}),
 				new ChargingStation(2, "Hamburg", new EnergySource[]{energySource[0], energySource[1]}),
 				new ChargingStation(3, "Bochum", new EnergySource[]{energySource[0], energySource[1], energySource[2]}),
-				new ChargingStation(4, "Dusseldorf", new EnergySource[]{energySource[0]})
+				new ChargingStation(4, "Hamm", new EnergySource[]{energySource[0]})
 				};
 		// Create equipment data
 		Equipment equips[] = new Equipment[]{
@@ -69,6 +69,9 @@ public class BasicIOandRegex {
 		System.out.println();
 		// Log file for each energy source
 		eachEnergyInfo(logEnergyManager, energySource, equips);
+		System.out.println();
+		// Log file for each equipment
+		eachEquipInfo(logEnergyManager, equips);
 		System.out.println();
 		//Log file for the whole system
 		systemInfo(logEnergyManager, equips);
@@ -238,6 +241,24 @@ public class BasicIOandRegex {
 			}
 //			System.out.println(sources[i].getName() + "_log.txt:\n" + printInfo);
 			logManage.createLogFile(sources[i].getName() + "_log.txt", printInfo); 
+		}
+	}
+	
+	// Add log file for each equipment
+	public static void eachEquipInfo(LogManager logManage, Equipment[] equips) {
+		String printInfo;
+		
+		for(int i=0; i<equips.length; i++) {
+			printInfo = "";
+			for(int j=0; j<equips[i].getDateCharging().length; j++) {
+				printInfo = printInfo + 
+						String.format("Equiqment charging at %s station\t by %s\t on %s.\n",
+						equips[i].getStations()[j].getName(), 
+						equips[i].getSources()[j].getName(), 
+						equips[i].getDateCharging()[j]);
+			}
+//			System.out.println(equips[i].getName() + equips[i].getId() + "_log.txt:\n" + printInfo);
+			logManage.createLogFile(equips[i].getName() + equips[i].getId() + "_log.txt", printInfo); 
 		}
 	}
 }
