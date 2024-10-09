@@ -9,6 +9,9 @@ import java.text.SimpleDateFormat;
 public class BasicIOandRegex {
     public static void main(String[] args) throws IOException {
 
+    	System.out.println("######################################################################################################");
+    	System.out.println("Create class for management log files, add methods to create/read/write/delete/archieve, simualte data streams");
+    	System.out.println("######################################################################################################");
         String logDirectory = "logs/";
         LogManager logManager = new LogManager(logDirectory);
         
@@ -36,6 +39,10 @@ public class BasicIOandRegex {
         
         // Simulate Data Exchange Using Streams
         simulateDataExchange();
+        System.out.println("######################################################################################################");
+		System.out.println("Add logs files for each day for each charging station, for each energy source and for all system as whole");
+		System.out.println("######################################################################################################");
+		System.out.println("\n");
         
         // Define output folder for energy log
         LogManager logEnergyManager = new LogManager("energyLog");
@@ -79,7 +86,11 @@ public class BasicIOandRegex {
 		System.out.println();
 		//Log file for the whole system
 		systemInfo(logEnergyManager, equips);
-
+		System.out.println("######################################################################################################");
+		System.out.println("Give user the possibility to open the requested log file based on the name of the equipment or date");
+		System.out.println("######################################################################################################");
+		System.out.println("\n");
+		
         // open log file based on equipment name or date
         String userInput = "Car0_log";
         String userInput2 = "Bike1_log";
