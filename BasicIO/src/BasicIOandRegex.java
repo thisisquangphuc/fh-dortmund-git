@@ -1,7 +1,11 @@
 import java.io.*;
 import java.nio.file.*;
 import java.util.zip.*;
-
+import java.awt.Desktop;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.text.SimpleDateFormat;
 public class BasicIOandRegex {
     public static void main(String[] args) throws IOException {
 
@@ -72,6 +76,14 @@ public class BasicIOandRegex {
 		System.out.println();
 		//Log file for the whole system
 		systemInfo(logEnergyManager, equips);
+
+        // open log file based on equipment name or date
+        String userInput = "Car0_log";
+        String userInput2 = "Bike1_log";
+        String userInput3 = "09/10/2024";
+		OpenFile_Equipbase(userInput);       
+		OpenFile_Equipbase(userInput2);
+		OpenFile_Datebase(userInput3);
 
     }
 
@@ -239,6 +251,118 @@ public class BasicIOandRegex {
 //			System.out.println(sources[i].getName() + "_log.txt:\n" + printInfo);
 			logManage.createLogFile(sources[i].getName() + "_log.txt", printInfo); 
 		}
+	}
+
+    // Give user the possibility to open the requested log file based on the name of the equipment or date
+    public static void OpenFile_Equipbase(String equip) {
+		// Path of the specific directory 
+	      String directoryPath = "D:/EclipseWorkspace/Data";
+	      
+	      // Using File class create an object for specific directory
+	      File directory = new File(directoryPath);
+	      
+	      // Using listFiles method we get all the files of a directory 
+	      // return type of listFiles is array
+	      File[] files = directory.listFiles();
+	      
+	      // Print name of the all files present in that path	      
+	      if (files != null) {
+	        for (File file : files) {
+	        	
+	        	Pattern pattern = Pattern.compile(equip + ".txt", Pattern.CASE_INSENSITIVE);
+	  	      	Matcher matcher = pattern.matcher(file.getName());
+	  	      	boolean matchFound = matcher.find();
+	  	      	if(matchFound) {
+	  	      		System.out.println("Match found");
+		  	      	try
+		            {  
+			            File file_open = new File("D:/EclipseWorkspace/Data/" + file.getName());
+			            if(!Desktop.isDesktopSupported())
+			            {  
+			                System.out.println("Desktop Support Not Present in the system.");
+			                return;  
+			            }  
+			            Desktop desktop = Desktop.getDesktop();  
+			            if(file_open.exists())         
+			                desktop.open(file_open);             
+			        }  
+			        catch(Exception e)  
+			        {  
+			            e.printStackTrace();  
+			        }
+	  	      	} else {
+	  	      		System.out.println("Match not found");
+	  	      	}
+	  	      	System.out.println(file.getName());
+	        }
+	      }
+	}
+	
+	public static void OpenFile_Datebase(String date) throws IOException{
+		// Path of the specific directory 
+	      String directoryPath = "D:/EclipseWorkspace/Data";
+	      
+	      
+	      // Using File class create an object for specific directory
+	      File directory = new File(directoryPath);
+	      
+	      // Using listFiles method we get all the files of a directory 
+	      // return type of listFiles is array
+	      File[] files = directory.listFiles();
+	      
+	      // Print name of the all files present in that path	      
+	      if (files != null) {
+	        for (File file : files) {
+	        	// storing the path of the file in the variable
+	    		String filename = directoryPath + "/" + file.getName();
+	    	
+	    		// creating the File class object
+	    		File my_file = new File(filename);
+	    	
+	    		// creating the path object
+	    		Path path = my_file.toPath();
+	    	
+	    		// creating BasicFileAttributes class object using
+	    		// readAttributes method
+	    		BasicFileAttributes file_att = Files.readAttributes(
+	    			path, BasicFileAttributes.class);
+	    	
+	    		// creating simple date format object to make the
+	    		// output more readable
+	    		SimpleDateFormat sd
+	    			= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	    	
+	    		System.out.print("File Creation Time: ");
+	    	
+	    		// converting time to milliseconds then specifying
+	    		// the format in which we want the output
+	    		String CreationDate = sd.format(file_att.creationTime().toMillis());
+	    		System.out.print(CreationDate);
+	    		Pattern pattern = Pattern.compile(date, Pattern.CASE_INSENSITIVE);
+	  	      	Matcher matcher = pattern.matcher(CreationDate);
+	  	      	boolean matchFound = matcher.find();
+	    		if(matchFound) {
+	    			try
+		            {  
+			            File file_open = new File("D:/EclipseWorkspace/Data/" + file.getName());
+			            if(!Desktop.isDesktopSupported())
+			            {  
+			                System.out.println("Desktop Support Not Present in the system.");
+			                return;  
+			            }  
+			            Desktop desktop = Desktop.getDesktop();  
+			            if(file_open.exists())         
+			                desktop.open(file_open);             
+			        }  
+			        catch(Exception e)  
+			        {  
+			            e.printStackTrace();  
+			        }
+	    		}      	
+	  	   
+	  	      	System.out.println(file.getName());
+	        }
+	      }
 	}
 }
 
