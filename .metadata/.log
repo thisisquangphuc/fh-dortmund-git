@@ -122,3 +122,35 @@ Caused by: java.lang.NullPointerException: Cannot invoke "org.eclipse.jdt.intern
 	at org.eclipse.jdt.internal.compiler.Compiler.process(Compiler.java:924)
 	at org.eclipse.jdt.internal.compiler.ProcessTaskManager.compile(ProcessTaskManager.java:163)
 	... 5 more
+!SESSION 2024-10-07 23:00:26.601 -----------------------------------------------
+eclipse.buildId=4.33.0.20240905-0613
+java.version=23
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=aarch64, WS=cocoa, NL=en_VN
+Framework arguments:  -product org.eclipse.epp.package.java.product -keyring /Users/phuc/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch aarch64 -product org.eclipse.epp.package.java.product -keyring /Users/phuc/.eclipse_keyring
+
+!ENTRY ch.qos.logback.classic 1 0 2024-10-07 23:00:29.032
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY org.eclipse.core.resources 2 10035 2024-10-07 23:00:55.409
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY ch.qos.logback.classic 1 0 2024-10-07 23:00:55.630
+!MESSAGE Logback config file: /Users/phuc/eclipse-workspace/.metadata/.plugins/org.eclipse.m2e.logback/logback.2.6.1.20240411-1122.xml
+!SESSION 2024-10-09 10:36:34.225 -----------------------------------------------
+eclipse.buildId=4.33.0.20240905-0613
+java.version=23
+java.vendor=Oracle Corporation
+BootLoader constants: OS=macosx, ARCH=aarch64, WS=cocoa, NL=en_VN
+Framework arguments:  -product org.eclipse.epp.package.java.product -keyring /Users/phuc/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch aarch64 -product org.eclipse.epp.package.java.product -keyring /Users/phuc/.eclipse_keyring
+
+!ENTRY ch.qos.logback.classic 1 0 2024-10-09 10:36:35.655
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY org.eclipse.core.resources 2 10035 2024-10-09 10:36:38.930
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY ch.qos.logback.classic 1 0 2024-10-09 10:36:39.190
+!MESSAGE Logback config file: /Users/phuc/eclipse-workspace/.metadata/.plugins/org.eclipse.m2e.logback/logback.2.6.1.20240411-1122.xml
