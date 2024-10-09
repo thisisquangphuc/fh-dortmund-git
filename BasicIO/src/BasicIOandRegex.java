@@ -61,12 +61,16 @@ public class BasicIOandRegex {
 						new EnergySource[]{stations[0].getEnergyAvail()[1], stations[1].getEnergyAvail()[0], stations[3].getEnergyAvail()[1]}),
 		};
 		
+		// Log file for each day
 		eachDayInfo(logEnergyManager, date, equips);
 		System.out.println();
+		// Log file for each charging station
 		eachStationInfo(logEnergyManager, stations, equips);
 		System.out.println();
+		// Log file for each energy source
 		eachEnergyInfo(logEnergyManager, energySource, equips);
 		System.out.println();
+		//Log file for the whole system
 		systemInfo(logEnergyManager, equips);
 
     }
@@ -144,6 +148,7 @@ public class BasicIOandRegex {
         
     }
 
+    // Add log file for the whole system
     public static void systemInfo(LogManager logManage, Equipment[] equips) {
 		String printInfo = "";
 		
@@ -161,6 +166,7 @@ public class BasicIOandRegex {
 		logManage.createLogFile("system_log.txt", printInfo); 
 	}
 	
+    // Add log file for each day
 	public static void eachDayInfo(LogManager logManage, String[] date, Equipment[] equips) {
 		String dateCharging[];
 		String printInfo;
@@ -171,7 +177,7 @@ public class BasicIOandRegex {
 			for(int j=0; j<equips.length; j++) {
 				dateCharging = equips[j].getDateCharging();
 				for(int k=0; k<dateCharging.length; k++) {
-					if (dateCharging[k].equals(date[i])) {
+					if (dateCharging[k].equals(date[i])) { // charging on date
 						printInfo = printInfo + 
 								String.format("Equiqment %s\t charging at %s station\t by %s.\n",
 								equips[j].getName(), 
@@ -185,7 +191,7 @@ public class BasicIOandRegex {
 		}
 	}
 	
-	
+	// Add log file for each station
 	public static void eachStationInfo(LogManager logManage, ChargingStation[] stations, Equipment[] equips) {
 		String printInfo;
 		ChargingStation[] stat;
@@ -196,7 +202,7 @@ public class BasicIOandRegex {
 			for(int j=0; j<equips.length; j++) { 
 				stat = equips[j].getStations();
 				for (int k=0; k<stat.length; k++) {
-					if (stat[k].getId() == stations[i].getId()) {
+					if (stat[k].getId() == stations[i].getId()) { // charging at station
 						printInfo = printInfo + 
 								String.format("Equiqment %s\t charging on %s\t by %s.\n",
 								equips[j].getName(), 
@@ -210,7 +216,7 @@ public class BasicIOandRegex {
 		}
 	}
 	
-	
+	// Add log file for each energy source
 	public static void eachEnergyInfo(LogManager logManage, EnergySource[] sources, Equipment[] equips) {
 		String printInfo;
 		EnergySource[] srcs;
@@ -221,7 +227,7 @@ public class BasicIOandRegex {
 			for(int j=0; j<equips.length; j++) { 
 				srcs = equips[j].getSources();
 				for (int k=0; k<srcs.length; k++) {
-					if (srcs[k].getName() == sources[i].getName()) {
+					if (srcs[k].getName() == sources[i].getName()) { // charging by source
 						printInfo = printInfo + 
 								String.format("Equiqment %s\t charging on %s\t at %s station.\n",
 								equips[j].getName(), 
