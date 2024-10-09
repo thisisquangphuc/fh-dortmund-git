@@ -32,6 +32,40 @@ public class BasicIOandRegex {
         
         // Simulate Data Exchange Using Streams
         simulateDataExchange();
+        
+        
+        String date[] = new String[]{"28.09", "29.09", "30.09", "01.10", "02.10", "03.10", "04.10", "05.10", "06.10", "07.10"};
+		
+		EnergySource energySource[] = new EnergySource[] {
+				new EnergySource("Petrol"), new EnergySource("DC"), new EnergySource("AC")
+				};
+		  
+		ChargingStation stations[] = new ChargingStation[] {
+				new ChargingStation(0, "Essen", new EnergySource[]{energySource[0], energySource[2]}),
+				new ChargingStation(1, "Dortmund", new EnergySource[]{energySource[1]}),
+				new ChargingStation(2, "Hamburg", new EnergySource[]{energySource[0], energySource[1]}),
+				new ChargingStation(3, "Bochum", new EnergySource[]{energySource[0], energySource[1], energySource[2]}),
+				new ChargingStation(4, "Dusseldorf", new EnergySource[]{energySource[0]})
+				};
+		
+		Equipment equips[] = new Equipment[]{
+				new Equipment(0, "Car", 
+						new String[]{date[3], date[5]}, 
+						new ChargingStation[]{stations[3], stations[4]}, 
+						new EnergySource[]{stations[3].getEnergyAvail()[1], stations[4].getEnergyAvail()[0]}), 
+				new Equipment(1, "Bike", 
+						new String[]{date[1], date[5], date[8]}, 
+						new ChargingStation[]{stations[0], stations[1], stations[3]}, 
+						new EnergySource[]{stations[0].getEnergyAvail()[1], stations[1].getEnergyAvail()[0], stations[3].getEnergyAvail()[1]}),
+		};
+		
+		eachDayInfo(logManager, date, equips);
+		System.out.println();
+		eachStationInfo(logManager, stations, equips);
+		System.out.println();
+		eachEnergyInfo(logManager, energySource, equips);
+		System.out.println();
+		systemInfo(logManager, equips);
 
     }
 
@@ -108,6 +142,96 @@ public class BasicIOandRegex {
         
     }
 
+    public static void systemInfo(LogManager logManage, Equipment[] equips) {
+		String printInfo = "";
+		
+		for(int i=0; i<equips.length; i++) {
+			printInfo += "Equipment" + equips[i].getId() + ", " + equips[i].getName() + " :\n";
+			for(int j=0; j<equips[i].getDateCharging().length; j++) {
+				printInfo = printInfo + 
+						String.format("\tcharging at %s station\t by %s\t on %s.\n",
+						equips[i].getStations()[j].getName(), 
+						equips[i].getSources()[j].getName(), 
+						equips[i].getDateCharging()[j]);
+			}
+		}
+//		System.out.println("system_log.txt:\n" + printInfo);
+		logManage.createLogFile("system_log.txt", printInfo); 
+	}
+	
+	public static void eachDayInfo(LogManager logManage, String[] date, Equipment[] equips) {
+		String dateCharging[];
+		String printInfo;
+		
+		for(int i=0; i<date.length; i++) {
+//			printInfo = String.format("On %s :\n", date[i]);
+			printInfo = "";
+			for(int j=0; j<equips.length; j++) {
+				dateCharging = equips[j].getDateCharging();
+				for(int k=0; k<dateCharging.length; k++) {
+					if (dateCharging[k].equals(date[i])) {
+						printInfo = printInfo + 
+								String.format("Equiqment %s\t charging at %s station\t by %s.\n",
+								equips[j].getName(), 
+								equips[j].getStations()[k].getName(), 
+								equips[j].getSources()[k].getName());
+					}
+				}
+			}
+//			System.out.println(date[i] + "_log.txt:\n" + printInfo);
+			logManage.createLogFile(date[i] + "_file.txt", printInfo); 
+		}
+	}
+	
+	
+	public static void eachStationInfo(LogManager logManage, ChargingStation[] stations, Equipment[] equips) {
+		String printInfo;
+		ChargingStation[] stat;
+		
+		for(int i=0; i<stations.length; i++) {
+//			printInfo = stations[i].getName() + " : ";
+			printInfo = "";
+			for(int j=0; j<equips.length; j++) { 
+				stat = equips[j].getStations();
+				for (int k=0; k<stat.length; k++) {
+					if (stat[k].getId() == stations[i].getId()) {
+						printInfo = printInfo + 
+								String.format("Equiqment %s\t charging on %s\t by %s.\n",
+								equips[j].getName(), 
+								equips[j].getDateCharging()[k], 
+								equips[j].getSources()[k].getName());
+					}
+				}
+			}
+//			System.out.println(stations[i].getName() + "_log.txt:\n" + printInfo);
+			logManage.createLogFile(stations[i].getName() + "_log.txt", printInfo);  
+		}
+	}
+	
+	
+	public static void eachEnergyInfo(LogManager logManage, EnergySource[] sources, Equipment[] equips) {
+		String printInfo;
+		EnergySource[] srcs;
+		
+		for(int i=0; i<sources.length; i++) {
+//			printInfo = sources[i].getName() + " : ";
+			printInfo = "";
+			for(int j=0; j<equips.length; j++) { 
+				srcs = equips[j].getSources();
+				for (int k=0; k<srcs.length; k++) {
+					if (srcs[k].getName() == sources[i].getName()) {
+						printInfo = printInfo + 
+								String.format("Equiqment %s\t charging on %s\t at %s station.\n",
+								equips[j].getName(), 
+								equips[j].getDateCharging()[k], 
+								equips[j].getStations()[k].getName());
+					}
+				}
+			}
+//			System.out.println(sources[i].getName() + "_log.txt:\n" + printInfo);
+			logManage.createLogFile(sources[i].getName() + "_log.txt", printInfo); 
+		}
+	}
 }
 
 class LogManager {
