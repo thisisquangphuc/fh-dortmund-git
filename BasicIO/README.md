@@ -1,10 +1,10 @@
 # Energy Management System
 
 ## Matriculation Number
-Group 8
-Phuc Le Quang - 7222361
-Quyen Ho - 7221978
-Van Dao Nguyen - 7221965
+- **Group 8**
+- Phuc Le Quang - 7222361
+- Quyen Ho - 7221978
+- Van Dao Nguyen - 7221965
 
 ## Role Distribution
 Phuc Le Quang (7222361): Create class for management log files, add methods to create/read/write/delete/archieve, simualte data streams
