@@ -84,9 +84,9 @@ public class BasicIOandRegex {
         String userInput = "Car0_log";
         String userInput2 = "Bike1_log";
         String userInput3 = "09/10/2024";
-		OpenFile_Equipbase(userInput);       
-		OpenFile_Equipbase(userInput2);
-		OpenFile_Datebase(userInput3);
+		OpenFile_Equipbase("energyLog", userInput);       
+//		OpenFile_Equipbase("energyLog", userInput2);
+//		OpenFile_Datebase(userInput3);
 
     }
 
@@ -257,10 +257,10 @@ public class BasicIOandRegex {
 	}
 
     // Give user the possibility to open the requested log file based on the name of the equipment or date
-    public static void OpenFile_Equipbase(String equip) {
+    public static void OpenFile_Equipbase(String srcPath, String equip) {
 		// Path of the specific directory 
-	      String directoryPath = "D:/EclipseWorkspace/Data";
-	      
+	      String directoryPath = srcPath;
+
 	      // Using File class create an object for specific directory
 	      File directory = new File(directoryPath);
 	      
@@ -271,15 +271,19 @@ public class BasicIOandRegex {
 	      // Print name of the all files present in that path	      
 	      if (files != null) {
 	        for (File file : files) {
+//	        	System.out.println("Filename:" + file.getName());
 	        	
-	        	Pattern pattern = Pattern.compile(equip + ".txt", Pattern.CASE_INSENSITIVE);
+	        	String findFile = equip + ".txt";
+//	        	System.out.println("Find find: " + findFile);
+	        	Pattern pattern = Pattern.compile(findFile, Pattern.CASE_INSENSITIVE);
 	  	      	Matcher matcher = pattern.matcher(file.getName());
 	  	      	boolean matchFound = matcher.find();
 	  	      	if(matchFound) {
-	  	      		System.out.println("Match found");
+//	  	      		System.out.println("    Match found");
 		  	      	try
 		            {  
-			            File file_open = new File("D:/EclipseWorkspace/Data/" + file.getName());
+		  	      		String fname = Paths.get(directoryPath, file.getName()).toString();
+			            File file_open = new File(fname);
 			            if(!Desktop.isDesktopSupported())
 			            {  
 			                System.out.println("Desktop Support Not Present in the system.");
@@ -294,9 +298,8 @@ public class BasicIOandRegex {
 			            e.printStackTrace();  
 			        }
 	  	      	} else {
-	  	      		System.out.println("Match not found");
+//	  	      		System.out.println("     Match not found");
 	  	      	}
-	  	      	System.out.println(file.getName());
 	        }
 	      }
 	}
