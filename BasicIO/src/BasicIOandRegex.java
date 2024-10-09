@@ -85,8 +85,8 @@ public class BasicIOandRegex {
         String userInput2 = "Bike1_log";
         String userInput3 = "09/10/2024";
 		OpenFile_Equipbase("energyLog", userInput);       
-//		OpenFile_Equipbase("energyLog", userInput2);
-//		OpenFile_Datebase(userInput3);
+		OpenFile_Equipbase("energyLog", userInput2);
+		OpenFile_Datebase("energyLog", userInput3);
 
     }
 
@@ -267,19 +267,19 @@ public class BasicIOandRegex {
 	      // Using listFiles method we get all the files of a directory 
 	      // return type of listFiles is array
 	      File[] files = directory.listFiles();
-	      
+	      boolean flag = false;
+          System.out.println("Searching: " + equip + ".txt");
 	      // Print name of the all files present in that path	      
 	      if (files != null) {
 	        for (File file : files) {
-//	        	System.out.println("Filename:" + file.getName());
-	        	
-	        	String findFile = equip + ".txt";
+//	        	System.out.println("Filename:" + file.getName());	        	
+	        	String findFile = equip + ".txt";            
 //	        	System.out.println("Find find: " + findFile);
 	        	Pattern pattern = Pattern.compile(findFile, Pattern.CASE_INSENSITIVE);
 	  	      	Matcher matcher = pattern.matcher(file.getName());
 	  	      	boolean matchFound = matcher.find();
 	  	      	if(matchFound) {
-//	  	      		System.out.println("    Match found");
+                    flag = true;
 		  	      	try
 		            {  
 		  	      		String fname = Paths.get(directoryPath, file.getName()).toString();
@@ -290,23 +290,30 @@ public class BasicIOandRegex {
 			                return;  
 			            }  
 			            Desktop desktop = Desktop.getDesktop();  
-			            if(file_open.exists())         
-			                desktop.open(file_open);             
+			            if(file_open.exists()){       
+			                desktop.open(file_open);
+                            System.out.println("    Match");
+                        } 
+
+                                 
 			        }  
 			        catch(Exception e)  
 			        {  
 			            e.printStackTrace();  
 			        }
-	  	      	} else {
-//	  	      		System.out.println("     Match not found");
-	  	      	}
+                    
+                }
 	        }
-	      }
+            if(flag == false){
+                System.out.println("File name not found");
+            }
+	    }
 	}
 	
-	public static void OpenFile_Datebase(String date) throws IOException{
+	public static void OpenFile_Datebase(String srcPath, String date) throws IOException{
+        boolean flag = false;
 		// Path of the specific directory 
-	      String directoryPath = "D:/EclipseWorkspace/Data";
+	      String directoryPath = srcPath;
 	      
 	      
 	      // Using File class create an object for specific directory
@@ -315,15 +322,16 @@ public class BasicIOandRegex {
 	      // Using listFiles method we get all the files of a directory 
 	      // return type of listFiles is array
 	      File[] files = directory.listFiles();
-	      
+	      System.out.println("Searching: " + date);
 	      // Print name of the all files present in that path	      
 	      if (files != null) {
 	        for (File file : files) {
+                
 	        	// storing the path of the file in the variable
-	    		String filename = directoryPath + "/" + file.getName();
+                String fname = Paths.get(directoryPath, file.getName()).toString();
 	    	
 	    		// creating the File class object
-	    		File my_file = new File(filename);
+	    		File my_file = new File(fname);
 	    	
 	    		// creating the path object
 	    		Path path = my_file.toPath();
@@ -348,17 +356,20 @@ public class BasicIOandRegex {
 	  	      	Matcher matcher = pattern.matcher(CreationDate);
 	  	      	boolean matchFound = matcher.find();
 	    		if(matchFound) {
+                    flag = true;
 	    			try
 		            {  
-			            File file_open = new File("D:/EclipseWorkspace/Data/" + file.getName());
+			            File file_open = new File(fname);
 			            if(!Desktop.isDesktopSupported())
 			            {  
 			                System.out.println("Desktop Support Not Present in the system.");
 			                return;  
 			            }  
 			            Desktop desktop = Desktop.getDesktop();  
-			            if(file_open.exists())         
-			                desktop.open(file_open);             
+			            if(file_open.exists()){      
+			                desktop.open(file_open);  
+                            System.out.println("    Match");
+                        }           
 			        }  
 			        catch(Exception e)  
 			        {  
@@ -366,8 +377,11 @@ public class BasicIOandRegex {
 			        }
 	    		}      	
 	  	   
-	  	      	System.out.println(file.getName());
+	  	      	
 	        }
+            if(flag == false){
+                System.out.println("File name not found");
+            }
 	      }
 	}
 	
