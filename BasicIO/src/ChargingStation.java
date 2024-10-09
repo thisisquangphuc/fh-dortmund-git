@@ -1,4 +1,3 @@
-
 public class ChargingStation {
 	private int id;
 	private String name;

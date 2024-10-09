@@ -1,4 +1,3 @@
-
 public class EnergySource {
 	private String name;
 	

@@ -33,13 +33,15 @@ public class BasicIOandRegex {
         // Simulate Data Exchange Using Streams
         simulateDataExchange();
         
-        
+        // Define output folder for energy log
+        LogManager logEnergyManager = new LogManager("energyLog");
+        // Create available date array
         String date[] = new String[]{"28.09", "29.09", "30.09", "01.10", "02.10", "03.10", "04.10", "05.10", "06.10", "07.10"};
-		
+		// Create energy source data 
 		EnergySource energySource[] = new EnergySource[] {
 				new EnergySource("Petrol"), new EnergySource("DC"), new EnergySource("AC")
 				};
-		  
+		// Create charging stations data 
 		ChargingStation stations[] = new ChargingStation[] {
 				new ChargingStation(0, "Essen", new EnergySource[]{energySource[0], energySource[2]}),
 				new ChargingStation(1, "Dortmund", new EnergySource[]{energySource[1]}),
@@ -47,7 +49,7 @@ public class BasicIOandRegex {
 				new ChargingStation(3, "Bochum", new EnergySource[]{energySource[0], energySource[1], energySource[2]}),
 				new ChargingStation(4, "Dusseldorf", new EnergySource[]{energySource[0]})
 				};
-		
+		// Create equipment data
 		Equipment equips[] = new Equipment[]{
 				new Equipment(0, "Car", 
 						new String[]{date[3], date[5]}, 
@@ -59,13 +61,13 @@ public class BasicIOandRegex {
 						new EnergySource[]{stations[0].getEnergyAvail()[1], stations[1].getEnergyAvail()[0], stations[3].getEnergyAvail()[1]}),
 		};
 		
-		eachDayInfo(logManager, date, equips);
+		eachDayInfo(logEnergyManager, date, equips);
 		System.out.println();
-		eachStationInfo(logManager, stations, equips);
+		eachStationInfo(logEnergyManager, stations, equips);
 		System.out.println();
-		eachEnergyInfo(logManager, energySource, equips);
+		eachEnergyInfo(logEnergyManager, energySource, equips);
 		System.out.println();
-		systemInfo(logManager, equips);
+		systemInfo(logEnergyManager, equips);
 
     }
 

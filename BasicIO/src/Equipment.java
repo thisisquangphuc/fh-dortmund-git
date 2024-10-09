@@ -1,4 +1,3 @@
-
 public class Equipment {
 	private int id;
 	private String name;
