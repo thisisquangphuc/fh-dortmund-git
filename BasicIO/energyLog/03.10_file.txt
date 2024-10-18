@@ -1,0 +1,2 @@
+Equiqment Car	 charging at Hamm station	 by Petrol.
+Equiqment Bike	 charging at Dortmund station	 by DC.

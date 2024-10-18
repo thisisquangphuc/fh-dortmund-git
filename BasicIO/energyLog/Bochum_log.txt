@@ -1,0 +1,2 @@
+Equiqment Car	 charging on 01.10	 by DC.
+Equiqment Bike	 charging on 06.10	 by DC.

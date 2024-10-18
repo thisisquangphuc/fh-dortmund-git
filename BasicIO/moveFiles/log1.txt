@@ -1,0 +1,1 @@
+{ station A, equipment:Car1, energy_source:AC, date: 10.10.2024 }

@@ -1,0 +1,3 @@
+Equiqment charging at Essen station	 by AC	 on 29.09.
+Equiqment charging at Dortmund station	 by DC	 on 03.10.
+Equiqment charging at Bochum station	 by DC	 on 06.10.

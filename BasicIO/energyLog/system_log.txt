@@ -1,0 +1,7 @@
+Equipment0, Car :
+	charging at Bochum station	 by DC	 on 01.10.
+	charging at Hamm station	 by Petrol	 on 03.10.
+Equipment1, Bike :
+	charging at Essen station	 by AC	 on 29.09.
+	charging at Dortmund station	 by DC	 on 03.10.
+	charging at Bochum station	 by DC	 on 06.10.

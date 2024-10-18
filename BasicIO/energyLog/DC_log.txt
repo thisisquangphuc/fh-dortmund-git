@@ -1,0 +1,3 @@
+Equiqment Car	 charging on 01.10	 at Bochum station.
+Equiqment Bike	 charging on 03.10	 at Dortmund station.
+Equiqment Bike	 charging on 06.10	 at Bochum station.
