@@ -44,6 +44,7 @@ public class BasicIOandRegex {
 		System.out.println("######################################################################################################");
 		System.out.println("\n");
         
+		//////////////////	
         // Define output folder for energy log
         LogManager logEnergyManager = new LogManager("energyLog");
         // Create available date array
@@ -86,6 +87,9 @@ public class BasicIOandRegex {
 		System.out.println();
 		//Log file for the whole system
 		systemInfo(logEnergyManager, equips);
+		System.out.println();
+		
+		//////////////////
 		System.out.println("######################################################################################################");
 		System.out.println("Give user the possibility to open the requested log file based on the name of the equipment or date");
 		System.out.println("######################################################################################################");
