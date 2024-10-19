@@ -19,7 +19,7 @@ class ResourceMngTest {
 		System.out.println("Check fail : "+ a);
 //		PrintStream originalOut = System.out;
 //		System.setOut(originalOut);
-        assertEquals(0, a, "Test fail!");                
+        assertEquals(0, a, "Test successful!");                
     }
 	
 	@Test                                               
@@ -27,7 +27,7 @@ class ResourceMngTest {
     void testcheckContent_TestfileEmpty() throws IOException {
 		int a = resourcemanagement.checkContent("test_files", "test3");
 		System.out.println("Check file emp : "+ a);
-		assertEquals(1, a, "Test successful!");
+		assertEquals(1, a, "File is not empty!");
                  
     }
 	
