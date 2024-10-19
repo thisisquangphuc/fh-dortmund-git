@@ -22,12 +22,13 @@
 ## Video Link
 https://fhdoprod-my.sharepoint.com/:v:/g/personal/quyen_ho002_stud_fh-dortmund_de/EVTUulV8mAJHgP3cYl_9oQQBFTXGoRPEVfUw_rluTm6BdQ?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=BVBjLD
 
+## Test Suit Result
+In the **result/** folder
+
 ## Development Environment
 - **Programming Language**: Java
 - **IDE**: Eclipse IDE
 - **Java Version**: [Java SE 12]
 - **Libraries**: This project uses standard Java libraries
-- **Java Version**: JDK 12
-- **IDE**: Eclipse
 - **Version Control**: Git (for source code management) and GitHub (for repository hosting)
 - **Testing Framework**: JUnit (for unit testing)
