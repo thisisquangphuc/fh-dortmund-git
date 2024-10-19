@@ -27,7 +27,7 @@ class ResourceMngTest {
     void testcheckContent_TestfileEmpty() throws IOException {
 		int a = resourcemanagement.checkContent("test_files", "test3");
 		System.out.println("Check file emp : "+ a);
-		assertEquals(1, a, "Test fail!");
+		assertEquals(1, a, "Test successful!");
                  
     }
 	
@@ -36,7 +36,7 @@ class ResourceMngTest {
     void testcheckContent_TestSuccess() throws IOException {
 		int a = resourcemanagement.checkContent("test_files", "test");
 		System.out.println("Check succ : "+ a);
-		assertEquals(2, a, "Test successful!");
+		assertEquals(2, a, "Test fail!");
                  
     }
 	
@@ -45,7 +45,7 @@ class ResourceMngTest {
 	public void testcheckExist_testFileNotExist() throws IOException {	
 		int a = resourcemanagement.checkExist("test_files", "test4");
 		System.out.println("Check file not exist: "+ a);
-		assertEquals(3, a, "File not exist");
+		assertEquals(3, a, "File is exist");
                    
     }
 	
