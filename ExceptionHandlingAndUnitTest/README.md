@@ -1,4 +1,4 @@
-# Energy Management System
+# Home assignment 2: Exception Handling And Unit Test
 
 ## Matriculation Number
 **Group 8**
