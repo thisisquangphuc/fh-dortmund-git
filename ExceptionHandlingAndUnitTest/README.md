@@ -8,20 +8,16 @@
 
 ## Task Distribution
 - Phuc Le Quang (7222361): 
-    Create the class for exception handling 
-        a.HandlingMultiple Exceptions
-        b.Re-throwing Exceptions
-    Create 5 test cases for each class
+    - Create the class for exception handling a.HandlingMultiple Exceptions and b.Re-throwing Exceptions
+    - Create 5 test cases for each class
 
 - Quyen Ho (7221978):
-    Create the class for exception handling
-        c.ResourceManagement
-    Create 5 test cases for each class
+    - Create the class for exception handling d.ChainingExceptions
+    - Create 5 test cases for each class
 
 - Van Dao Nguyen (7221965): 
-    Create the class for exception handling
-        d.ChainingExceptions
-    Create 5 test cases for each class
+    - Create the class for exception handling c.ResourceManagement 
+    - Create 5 test cases for each class
 
 ## Video Link
 
