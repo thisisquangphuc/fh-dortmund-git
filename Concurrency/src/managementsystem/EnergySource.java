@@ -1,3 +1,4 @@
+package managementsystem;
 public class EnergySource {
 	private String name;
 	
