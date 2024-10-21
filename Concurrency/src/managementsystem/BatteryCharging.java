@@ -16,7 +16,7 @@ public class BatteryCharging extends Thread {
 		System.out.format("%s starts charging the Battery%d.....\n", 
 				Thread.currentThread().getName(), battery.getId());
 		// Charge the battery
-		while (battery.getCurrentCharge() < battery.getCapacity()) {
+		while (battery.getcurrentAmount() < battery.getCapacity()) {
 			battery.charge(chargingRate);
 			try {
                 Thread.sleep(1000); // Time taken to charge battery 

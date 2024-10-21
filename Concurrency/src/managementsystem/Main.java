@@ -1,7 +1,7 @@
 package managementsystem;
 
 public class Main {
-	static int totalDeviceCurrent = 0;
+
 	static int numOfBatteries = 0;
 	public static void main(String[] args) {
 		// HI, this is main
@@ -19,8 +19,8 @@ public class Main {
 		
 		// Init batteries
 		Battery battery[] = new Battery[] {
-			new Battery(50,50),
-			new Battery(99,99)
+			new Battery(50,20),
+			new Battery(100,20)
 		};
 		numOfBatteries = battery.length;
 		
@@ -40,8 +40,31 @@ public class Main {
 		//***********************************************
 		// BATTERY USAGE
 		//***********************************************
-		BatteryUsageSimulation usage = new BatteryUsageSimulation();
-		usage.Usage();
+//		BatteryUsageSimulation usage = new BatteryUsageSimulation();
+//		usage.Usage(battery[1]);
+		
+		// Create and start multiple energy consumers
+
+	    EnergyConsumer device1 = new EnergyConsumer(battery[1], "Device 1", (int) (Math.random() * 10 + 5));
+	    EnergyConsumer device2 = new EnergyConsumer(battery[1], "Device 2", (int) (Math.random() * 10 + 5));
+	    EnergyConsumer device3 = new EnergyConsumer(battery[1], "Device 3", (int) (Math.random() * 10 + 5));
+	    //System.out.println("Total Current from Devices: " + Main.totalDeviceCurrent + " Ampere");
+	    
+	    device1.start();
+	    device2.start();
+	    device3.start();
+
+	    // Wait for all threads to finish
+	    try {
+	        device1.join();
+	        device2.join();
+	        device3.join();
+	    } catch (InterruptedException e) {
+	        Thread.currentThread().interrupt();
+	    }
+
+	    System.out.println("Final Battery Charge: " + battery[1].getcurrentAmount() + "Wh");
+
 	}
 
 	//////////////////
@@ -63,7 +86,7 @@ public class Main {
 		System.out.println("\nCharging DONE......");
 		for(int i=0; i<numOfBatteries;i++) {
 			System.out.format("Battery%d is fully charged: %dWh.\n", 
-					battery[0].getId(), battery[i].getCurrentCharge());
+					battery[0].getId(), battery[i].getcurrentAmount());
 		}
 	}
 }
