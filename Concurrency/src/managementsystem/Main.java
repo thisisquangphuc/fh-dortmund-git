@@ -5,7 +5,9 @@ public class Main {
 	static int numOfBatteries = 0;
 	public static void main(String[] args) {
 		// HI, this is main
+		System.out.println("\n*********************\n");
 		System.out.println("Energy Management System!");
+		System.out.println("\n*********************\n");
 		
 		//***********************************************
 		// CHARGING BATTERY
@@ -31,7 +33,9 @@ public class Main {
 				new BatteryCharging(battery[1], energySource[2], 25),
 		};
 		// charge batteries from energy sources
+		System.out.println("\nCharging......");
 		chargingBattery(battery, batteryCharging);
+		System.out.println("\n*********************\n");
 		
 		//***********************************************
 		// BATTERY USAGE
@@ -56,6 +60,7 @@ public class Main {
 	        Thread.currentThread().interrupt();
 	    }
 		
+		System.out.println("\nCharging DONE......");
 		for(int i=0; i<numOfBatteries;i++) {
 			System.out.format("Battery%d is fully charged: %dWh.\n", 
 					battery[0].getId(), battery[i].getCurrentCharge());
