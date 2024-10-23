@@ -22,7 +22,7 @@ public class Battery {
         System.out.format("Battery%d is charged %dWh by %s energy, Current Charge: %dWh - %d%%.\n", 
         		this.id, amount, chargingEnergy.getEnergySource().getName(), currentAmount, (int)(100*currentAmount)/capacity);
         if (currentAmount == capacity) {
-        	System.out.format("Battery%d DONE charging.\n", this.id);
+        	System.out.format("Battery%d is fully charged: %dWh.\n", this.id, currentAmount);
         }
     }
     

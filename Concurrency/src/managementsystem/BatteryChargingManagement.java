@@ -16,15 +16,18 @@ public class BatteryChargingManagement extends Thread {
 	@Override
 	public void run() {
 		boolean done = false;
-		// Wait batteries done
-		while (true) {
+		// start charging battery
+		for (int i=0; i<chargingEnergy.length; i++) {
+			chargingEnergy[i].start();
+		}
+		// Wait battery done charging
+		while (true) {	
 			while (!this.key.tryAcquire());
 			done = !(battery.getcurrentAmount()<battery.getCapacity());
 			this.key.release();
 			if (done == true) break;
 		}	
-		System.out.format("Battery%d is fully charged: %dWh.\n", 
-				battery.getId(), battery.getcurrentAmount());
+		System.out.format("Battery%d DONE charging.\n", battery.getId()); 
 	}
 	
 	public Battery getBattery() {

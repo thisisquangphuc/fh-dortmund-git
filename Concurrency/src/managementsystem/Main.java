@@ -20,7 +20,7 @@ public class Main {
 		
 		// Init batteries
 		Battery battery[] = new Battery[] {
-			new Battery(0, 100, 0),
+			new Battery(0, 150, 0),
 			new Battery(1, 111, 0)
 		};
 		
@@ -51,13 +51,9 @@ public class Main {
 		);
 		
 		// Charge batteries from energy sources
-		System.out.println("\nCharging......");
-		startChargingBattery(battery0ChargingMgmt);
-		startChargingBattery(battery1ChargingMgmt);
+		chargingBattery(battery0ChargingMgmt);
+		chargingBattery(battery1ChargingMgmt);
 		
-		waitBatteryChargedDone(battery0ChargingMgmt);
-		waitBatteryChargedDone(battery1ChargingMgmt);
-				
 		// wait all threads done
 		try {
 			for(int i=0; i<energySourceForBattery0.length; i++) {
@@ -106,16 +102,8 @@ public class Main {
 
 	//////////////////
 	// Charge battery from energy sources
-	public static void startChargingBattery(BatteryChargingManagement batteryChargingMgmt) {
-		EnergySourceForBattery chargingEnergy[] = batteryChargingMgmt.getChargingEnergy();
-		
-		for (int i=0; i<chargingEnergy.length;i++) {
-			chargingEnergy[i].start();
-		}
-	}
-	
-	// Wait and notify when battery charged done from energy sources
-	public static void waitBatteryChargedDone(BatteryChargingManagement batteryChargingMgmt) {
+	public static void chargingBattery(BatteryChargingManagement batteryChargingMgmt) {
+		System.out.format("Start Charging Battery%d......\n", batteryChargingMgmt.getBattery().getId());
 		batteryChargingMgmt.start();
 	}
 }
