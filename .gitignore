@@ -1,1 +1,42 @@
 /.metadata/
+.metadata/
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files
+*.jar
+*.war
+*.ear
+
+# IDE specific files
+/.idea/
+/*.iml
+/.project
+/.classpath
+/.settings/
+
+# Maven
+/target/
+/pom.xml.tag
+/pom.xml.releaseBackup
+/release.properties
+
+# Gradle
+/.gradle/
+/build/
+
+# Eclipse
+*.pydevproject
+.project
+.classpath
+.cxx
+build/
