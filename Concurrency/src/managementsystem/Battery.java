@@ -5,23 +5,25 @@ public class Battery {
     private int currentAmount; // in watt-hours
 //    private int ElectricCurrent;
 
-    public Battery(int capacity, int currentAmount) {
-        this.capacity = capacity;
-        this.currentAmount = currentAmount; //capacity;
-//        this.ElectricCurrent = elecCurrent;
-        this.id = Main.numOfBatteries;
-        Main.numOfBatteries += 1;
-//        System.out.println("Current of Battery" + this.id + ": " + ElectricCurrent + " Ampere");
+    public Battery(int id, int capacity, int currentCharge, int elecCurrent) {
+        this.id = id;
+    	this.capacity = capacity;
+        this.currentAmount = currentCharge; //capacity;
+        // this.ElectricCurrent = elecCurrent;
+        // System.out.println("Current of Battery" + this.id + ": " + ElectricCurrent + " Ampere");
     }
 
     // Synchronized method to charge the battery
-    public synchronized void charge(int amount) {
+    public synchronized void charge(int amount, EnergySource chargingEnergy) {
         if (this.currentAmount + amount > capacity) {
             amount = capacity - this.currentAmount;
         }
         this.currentAmount += amount;
-        System.out.format("%s charged Battery%d %dWh, Current Charge: %dWh.\n", 
-        		Thread.currentThread().getName(), this.id, amount, currentAmount);
+        System.out.format("Battery%d is charged %dWh by %s energy, Current Charge: %dWh - %d%%.\n", 
+        		this.id, amount, chargingEnergy.getName(), currentAmount, (int)(100*currentAmount)/capacity);
+        if (currentAmount == capacity) {
+        	System.out.format("Charging Battery%d DONE.\n", this.id);
+        }
     }
     
     public synchronized boolean useEnergy(int amount) {

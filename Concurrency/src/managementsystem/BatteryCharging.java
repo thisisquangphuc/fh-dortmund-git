@@ -1,32 +1,36 @@
 package managementsystem;
 
+import java.util.concurrent.Semaphore;
+
 public class BatteryCharging extends Thread {
 	private Battery battery;
-	private EnergySource energyAvail;
+	private EnergySource chargingEnergy;
 	private int chargingRate;
+	private Semaphore key;
 	
-	public BatteryCharging (Battery battery, EnergySource energyAvail, int chargingRate) {
+	public BatteryCharging (Semaphore key, Battery battery, EnergySource energyAvail, int chargingRate) {
 		setBattery(battery);
-		setEnergyAvail(energyAvail);
+		setChargingEnergy(energyAvail);
 		setChargingRate(chargingRate);
+		this.key = key;
 	}
 	
 	@Override
 	public void run() {
-		System.out.format("%s starts charging the Battery%d.....\n", 
-				Thread.currentThread().getName(), battery.getId());
+		System.out.format("Start charging Battery%d by %s energy.....\n", 
+				battery.getId(), chargingEnergy.getName());
 		// Charge the battery
-		while (battery.getcurrentAmount() < battery.getCapacity()) {
-			battery.charge(chargingRate);
+		while (true) {
+			while(!this.key.tryAcquire());
 			try {
-                Thread.sleep(1000); // Time taken to charge battery 
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                break;
-            }
+				if (battery.getcurrentAmount() >= battery.getCapacity()) break;
+				battery.charge(chargingRate, chargingEnergy);
+			} finally {
+				this.key.release();
+			}
 		}
-		 System.out.format("%s stops charging because the Battery%d has reached MAX capacity %d Wh.\n", 
-				 Thread.currentThread().getName(), battery.getId(), battery.getCapacity());
+		System.out.format("%s can not continue charging Battery%d because of MAX capacity %d Wh.\n", 
+				chargingEnergy.getName(), battery.getId(), battery.getCapacity());
 	}
 	
 	public Battery getBattery() {
@@ -35,11 +39,11 @@ public class BatteryCharging extends Thread {
 	public void setBattery(Battery battery) {
 		this.battery = battery;
 	}
-	public EnergySource getEnergyAvail() {
-		return energyAvail;
+	public EnergySource getChargingEnergy() {
+		return chargingEnergy;
 	}
-	public void setEnergyAvail(EnergySource energyAvail) {
-		this.energyAvail = energyAvail;
+	public void setChargingEnergy(EnergySource energyAvail) {
+		this.chargingEnergy = energyAvail;
 	}
 	public int getChargingRate() {
 		return chargingRate;
