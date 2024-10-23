@@ -46,14 +46,13 @@ public class Main {
 		//***********************************************
 		// BATTERY USAGE
 		//***********************************************
-//		BatteryUsageSimulation usage = new BatteryUsageSimulation();
-//		usage.Usage(battery[1]);
-		
+			
 		// Create and start multiple energy consumers
+		Battery myBattery = battery[1];
 
-	    EnergyConsumer device1 = new EnergyConsumer(battery[1], "Device 1", (int) (Math.random() * 10 + 5));
-	    EnergyConsumer device2 = new EnergyConsumer(battery[1], "Device 2", (int) (Math.random() * 10 + 5));
-	    EnergyConsumer device3 = new EnergyConsumer(battery[1], "Device 3", (int) (Math.random() * 10 + 5));
+	    EnergyConsumer device1 = new EnergyConsumer(myBattery, "Device 1", (int) (Math.random() * 10 + 5));
+	    EnergyConsumer device2 = new EnergyConsumer(myBattery, "Device 2", (int) (Math.random() * 10 + 5));
+	    EnergyConsumer device3 = new EnergyConsumer(myBattery, "Device 3", (int) (Math.random() * 10 + 5));
 	    //System.out.println("Total Current from Devices: " + Main.totalDeviceCurrent + " Ampere");
 	    
 	    device1.start();
@@ -69,7 +68,7 @@ public class Main {
 	        Thread.currentThread().interrupt();
 	    }
 
-	    System.out.println("Final Battery Charge: " + battery[1].getcurrentAmount() + "Wh");
+//	    System.out.println("Final Battery Charge: " + battery[1].getcurrentAmount() + "Wh");
 
 	}
 
