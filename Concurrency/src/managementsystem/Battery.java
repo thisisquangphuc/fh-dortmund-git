@@ -14,15 +14,15 @@ public class Battery {
     }
 
     // Synchronized method to charge the battery
-    public synchronized void charge(int amount, EnergySource chargingEnergy) {
+    public synchronized void charge(int amount, EnergySourceForBattery chargingEnergy) {
         if (this.currentAmount + amount > capacity) {
             amount = capacity - this.currentAmount;
         }
         this.currentAmount += amount;
         System.out.format("Battery%d is charged %dWh by %s energy, Current Charge: %dWh - %d%%.\n", 
-        		this.id, amount, chargingEnergy.getName(), currentAmount, (int)(100*currentAmount)/capacity);
+        		this.id, amount, chargingEnergy.getEnergySource().getName(), currentAmount, (int)(100*currentAmount)/capacity);
         if (currentAmount == capacity) {
-        	System.out.format("Charging Battery%d DONE.\n", this.id);
+        	System.out.format("Battery%d DONE charging.\n", this.id);
         }
     }
     

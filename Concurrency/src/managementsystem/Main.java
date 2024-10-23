@@ -28,19 +28,51 @@ public class Main {
 		Semaphore key[] = new Semaphore[] { new Semaphore(1), new Semaphore(1) };  
 		
 		// Init charging pair for each battery and energy source
-		BatteryCharging[] batteryCharging = new BatteryCharging[] {
-				// battery0 with its corresponding energy sources
-				new BatteryCharging(key[0], battery[0], energySource[0], 8),
-				new BatteryCharging(key[0], battery[0], energySource[1], 12),
-				new BatteryCharging(key[0], battery[0], energySource[2], 25),
-				// battery1 with its corresponding energy sources
-				new BatteryCharging(key[1], battery[1], energySource[1], 12),
-				new BatteryCharging(key[1], battery[1], energySource[2], 25),
+		// battery0 with its corresponding energy sources
+		EnergySourceForBattery[] energySourceForBattery0 = new EnergySourceForBattery[] {
+				new EnergySourceForBattery(key[0], battery[0], energySource[0], 8),  // Solar charge battery0
+				new EnergySourceForBattery(key[0], battery[0], energySource[1], 12), // DC charge battery0
+				new EnergySourceForBattery(key[0], battery[0], energySource[2], 25)	 // AC charge battery0
 		};
+		// battery1 with its corresponding energy sources
+		EnergySourceForBattery[] energySourceForBattery1 = new EnergySourceForBattery[] {
+				new EnergySourceForBattery(key[1], battery[1], energySource[1], 13), // DC charge battery1
+				new EnergySourceForBattery(key[1], battery[1], energySource[2], 28)  // AC charge battery1
+		};
+		
+		// Create battery charging management for each battery
+		BatteryChargingManagement battery0ChargingMgmt = new BatteryChargingManagement (
+				key[0], battery[0], new EnergySourceForBattery[] {
+						energySourceForBattery0[0], energySourceForBattery0[1], energySourceForBattery0[2]}
+		);
+		BatteryChargingManagement battery1ChargingMgmt = new BatteryChargingManagement (
+				key[1], battery[1], new EnergySourceForBattery[] {
+						energySourceForBattery1[0], energySourceForBattery1[1]}
+		);
 		
 		// Charge batteries from energy sources
 		System.out.println("\nCharging......");
-		chargingBattery(battery, batteryCharging);
+		startChargingBattery(battery0ChargingMgmt);
+		startChargingBattery(battery1ChargingMgmt);
+		
+		waitBatteryChargedDone(battery0ChargingMgmt);
+		waitBatteryChargedDone(battery1ChargingMgmt);
+				
+		// wait all threads done
+		try {
+			for(int i=0; i<energySourceForBattery0.length; i++) {
+				energySourceForBattery0[i].join();
+			}
+			
+			for(int i=0; i<energySourceForBattery1.length; i++) {
+				energySourceForBattery0[i].join();
+			}
+			
+			battery0ChargingMgmt.join();
+			battery1ChargingMgmt.join();
+		} catch (InterruptedException e) {
+	        Thread.currentThread().interrupt();
+	    }
 		System.out.println("\n*********************\n");
 		
 		//***********************************************
@@ -68,41 +100,22 @@ public class Main {
 	        Thread.currentThread().interrupt();
 	    }
 
-//	    System.out.println("Final Battery Charge: " + battery[1].getcurrentAmount() + "Wh");
+	    System.out.println("Final Battery Charge: " + battery[1].getcurrentAmount() + "Wh");
 
 	}
 
 	//////////////////
-	// Charge batteries from energy sources
-	public static void chargingBattery(Battery[] battery, BatteryCharging[] batteryCharging) {
-//		boolean allDone = true;
-		// start thread to charge battery
-		for(int i=0; i<batteryCharging.length; i++) {
-			batteryCharging[i].start();
-		}
-		// wait all threads done
-		try {
-			for(int i=0; i<batteryCharging.length; i++) {
-				batteryCharging[i].join();
-			}
-		} catch (InterruptedException e) {
-	        Thread.currentThread().interrupt();
-	    }
+	// Charge battery from energy sources
+	public static void startChargingBattery(BatteryChargingManagement batteryChargingMgmt) {
+		EnergySourceForBattery chargingEnergy[] = batteryChargingMgmt.getChargingEnergy();
 		
-//		do {
-//			allDone = true;
-//			for(int i=0; i<batteryCharging.length; i++) {
-//				if (batteryCharging[i].isAlive()) {
-//					allDone = false;
-//					break;
-//				}
-//			}
-//		} while (!allDone);
-		
-		System.out.println();
-		for(int i=0; i<battery.length; i++) {
-			System.out.format("Battery%d is fully charged: %dWh.\n", 
-					battery[i].getId(), battery[i].getcurrentAmount());
+		for (int i=0; i<chargingEnergy.length;i++) {
+			chargingEnergy[i].start();
 		}
+	}
+	
+	// Wait and notify when battery charged done from energy sources
+	public static void waitBatteryChargedDone(BatteryChargingManagement batteryChargingMgmt) {
+		batteryChargingMgmt.start();
 	}
 }
