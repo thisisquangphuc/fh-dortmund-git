@@ -5,7 +5,7 @@ public class Battery {
     private int currentAmount; // in watt-hours
 //    private int ElectricCurrent;
 
-    public Battery(int id, int capacity, int currentCharge, int elecCurrent) {
+    public Battery(int id, int capacity, int currentCharge) {
         this.id = id;
     	this.capacity = capacity;
         this.currentAmount = currentCharge; //capacity;

@@ -20,8 +20,8 @@ public class Main {
 		
 		// Init batteries
 		Battery battery[] = new Battery[] {
-			new Battery(0, 100, 0, 100),
-			new Battery(1, 111, 0, 111)
+			new Battery(0, 100, 0),
+			new Battery(1, 111, 0)
 		};
 		
 		// Create semaphore corresponding to each battery
