@@ -13,6 +13,8 @@
     - provide a comparison of the currency models (Procs & Cons)
     - explain differences between Concurrency vs Parallelism
     - explain the usage of Blocking Concurrency Algorithms and Non-blocking Concurrency Algorithms
+## Document
+Kindly find the answer of three follow-up question in the /doc folder. (File name: Group_8_HA3_Concurrency.pdf)
 
 ## Video Link
 https://drive.google.com/file/d/1Z40yuC1Lcqxcizr-E-iJkxjBg5B3EsRc/view?usp=share_link 
