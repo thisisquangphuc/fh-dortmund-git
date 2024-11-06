@@ -7,16 +7,16 @@ class EnergyConsumer extends Thread {
         super(name);
         this.battery = battery;
         this.usageRate = usageRate;
-//        Main.totalDeviceCurrent = Main.totalDeviceCurrent + DeviceCurrent;
+
         
     }
 
     @Override
     public void run() {
-    	//System.out.println("Total Current from Devices: " + Main.totalDeviceCurrent);
+    	
         while (true) {
             // Attempt to use energy from the battery
-            if (!battery.useEnergy(usageRate)) { //|| Main.totalDeviceCurrent > battery.getCurrent()) {
+            if (!battery.useEnergy(usageRate)) {
                 break; // Exit if there's not enough charge
             }
             try {

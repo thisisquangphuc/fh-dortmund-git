@@ -3,14 +3,13 @@ public class Battery {
 	private int id;
 	private final int capacity; // in watt-hours
     private int currentAmount; // in watt-hours
-//    private int ElectricCurrent;
+
 
     public Battery(int id, int capacity, int currentCharge) {
         this.id = id;
     	this.capacity = capacity;
         this.currentAmount = currentCharge; //capacity;
-        // this.ElectricCurrent = elecCurrent;
-        // System.out.println("Current of Battery" + this.id + ": " + ElectricCurrent + " Ampere");
+        
     }
 
     // Synchronized method to charge the battery
@@ -27,7 +26,7 @@ public class Battery {
     }
     
     public synchronized boolean useEnergy(int amount) {
-        if (this.currentAmount >= amount) {// & Main.totalDeviceCurrent <= ElectricCurrent) {
+        if (this.currentAmount >= amount) {
             this.currentAmount -= amount;
             System.out.println(Thread.currentThread().getName() + " used " + amount + "Wh, Remaining Charge: " + currentAmount + "Wh");
             return true;
@@ -45,9 +44,7 @@ public class Battery {
         return capacity;
     }
     
-//    public int getCurrent() {
-//        return ElectricCurrent;
-//    }
+
     public int getId() {
     	return id;
     }

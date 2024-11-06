@@ -81,7 +81,7 @@ public class Main {
 	    EnergyConsumer device1 = new EnergyConsumer(myBattery, "Device 1", (int) (Math.random() * 10 + 5));
 	    EnergyConsumer device2 = new EnergyConsumer(myBattery, "Device 2", (int) (Math.random() * 10 + 5));
 	    EnergyConsumer device3 = new EnergyConsumer(myBattery, "Device 3", (int) (Math.random() * 10 + 5));
-	    //System.out.println("Total Current from Devices: " + Main.totalDeviceCurrent + " Ampere");
+	    
 	    
 	    device1.start();
 	    device2.start();
